@@ -9,61 +9,62 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
-public class setup {
-    private static WebDriver driver;
-    private static final Logger LOGGER =  (Logger) LogManager.getLogger(setup.class.getName()); // Corrected Logger initialization
+public class Setup {
+	private static WebDriver driver;
+	private static final Logger LOGGER = (Logger) LogManager.getLogger(Setup.class.getName()); // Corrected Logger
+																								// initialization
 
-    /**
-     * Method to initialize WebDriver based on the browser.
-     */
-    public void setWebDriver(Scenario scenario) {
-        LOGGER.info("Scenario: " + scenario.getName() + " - Started -");
+	/**
+	 * Static method to initialize WebDriver based on the browser.
+	 */
+	@Before
 
-        String browser = System.getProperty("browser");
-        if (browser == null) {
-            browser = "chrome"; // Default browser
-        }
+	public void setWebDriver(Scenario scenario) {
+		LOGGER.info("Scenario: " + scenario.getName() + " - Started -");
 
-        switch (browser) {
-            case "chrome":
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--start-maximized"); // Fixed quotes here
-                chromeOptions.addArguments("--disable-search-engine-choice-screen");
-                setDriver(new ChromeDriver(chromeOptions));
-                break;
+		String browser = System.getProperty("browser");
+		if (browser == null) {
+			browser = "chrome"; // Default browser
+		}
 
-            case "firefox":
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.setCapability("platform", Platform.WIN11);
-                setDriver(new FirefoxDriver(firefoxOptions));
-                break;
+		switch (browser) {
+		case "chrome":
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("--start-maximized"); // Fixed quotes here
+			chromeOptions.addArguments("--disable-search-engine-choice-screen");
+			setDriver(new ChromeDriver(chromeOptions));
+			break;
 
-            case "edge":
-                setDriver(new EdgeDriver());
-                break;
+		case "firefox":
+			FirefoxOptions firefoxOptions = new FirefoxOptions();
+			firefoxOptions.setCapability("platform", Platform.WIN11);
+			setDriver(new FirefoxDriver(firefoxOptions));
+			break;
 
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
-        }
-    }
+		case "edge":
+			setDriver(new EdgeDriver());
+			break;
 
-    // GETTERS
-    public static WebDriver getDriver() {
-        return driver;
-    }
+		default:
+			throw new IllegalArgumentException("Unsupported browser: " + browser);
+		}
+	}
 
-    public static void setDriver(WebDriver driver) {
-        setup.driver = driver;
-    }
+	// GETTERS
+	public static WebDriver getDriver() {
+		return driver;
+	}
 
-    // Corrected the method name and return type
-    public static Logger getLogger() {
-        return LOGGER; // Fixed incorrect name
-    }
+	public static void setDriver(WebDriver driver) {
+		Setup.driver = driver;
+	}
+
+	// Corrected the method name and return type
+	public static Logger getLogger() {
+		return LOGGER;
+	}
 }
-
-    
-    
-    

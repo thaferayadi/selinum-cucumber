@@ -1,13 +1,12 @@
-
 @Login
 Feature: Login
-En tant que utilisateur je souhaite tester la page de connexion
+  En tant qu'utilisateur, je souhaite tester la page de connexion
+
   @Login_valid_credential
   Scenario: Login avec des données valides
     Given je me connecte sur l'application Orange
-    When Je saisie le username "Admin"
-    And Je saisie le motPasse "admin 123"
-    And je clique sur le boutton login
-    Then rederaction vers la page Dashboard "Dashboard "
+    When Je saisis le username "Admin"
+    And Je saisis le mot de passe "admin123"
+    And je clique sur le bouton login
+    Then redirection vers la page Dashboard 
 
- 

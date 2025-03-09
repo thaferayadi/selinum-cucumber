@@ -7,8 +7,8 @@ import org.openqa.selenium.support.How;
 import com.e2eTest.automation.utils.BasePage;
 import com.e2eTest.automation.utils.Setup;
 
-public class LoginPage extends BasePage {
-	// retrieve elements//
+public class Logout extends BasePage {
+	
 	@FindBy(how = How.NAME, using = "username")
 	private  WebElement username;
 	@FindBy(how = How.NAME, using = "password")
@@ -19,9 +19,17 @@ public class LoginPage extends BasePage {
 
 	@FindBy(how = How.XPATH, using = "//h6[normalize-space()='Dashboard']")
 	private static WebElement menu_dashboard;
-
+	
+	@FindBy(how = How.XPATH, using = "//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']")
+	private static WebElement listederoulante;
+	
+	@FindBy(how = How.XPATH, using = "//a[normalize-space()='Logout']")
+	private static WebElement btnLogout;
+	
+	@FindBy(how = How.XPATH, using = "//label[normalize-space()='Username']")
+	private static WebElement verifyLogout;
 	// Constructor /
-	public LoginPage() {
+	public Logout() {
 
 		super(Setup.getDriver());
 	}
@@ -44,6 +52,16 @@ public class LoginPage extends BasePage {
 	public String getDashboardTitle() {
 		return menu_dashboard.getText();
 	}
-    
-    }
+	public void  clickListederoulante() {
+		listederoulante.click();
+	}
+	public void  clickBtnLogout()  {
+		btnLogout.click();
+	
+	}
+	public String getVerifyLogout() {
+		return verifyLogout.getText();
+	}
 
+	
+}
